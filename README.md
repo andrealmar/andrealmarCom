@@ -1,4 +1,4 @@
-andrealmarCom
+andrealmar.com
 =============
 
-André Almar personal website
+My personal website
