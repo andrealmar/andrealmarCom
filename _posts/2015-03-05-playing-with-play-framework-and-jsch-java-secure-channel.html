@@ -1,0 +1,169 @@
+---
+layout: post
+title: Playing with Play Framework and JSch - Java Secure Channel
+date: 2015-03-05 14:06:29.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- java
+- jsch
+- play framework
+tags: []
+meta:
+  _edit_last: '1'
+author:
+  login: admin
+  email: me@andrealmar.com
+  display_name: Andre Almar
+  first_name: Andre
+  last_name: Almar
+---
+<p>Howdy,</p>
+<p>I'm gonna show you how to use the the Java library JSch - Java Secure Channel to connect to a server and send SSH commands to a UNIX shell and then return the output to our webpage. I'm using Play Framework to develop this webapp. If you want to know more about Play Framework just visit <a href="https://www.playframework.com">https://www.playframework.com</a></p>
+<p><strong>A little bit about JSch:</strong></p>
+<p>JSch is a pure Java implementation of <a href="http://ietf.org/html.charters/secsh-charter.html" target="_blank">SSH2</a>.<br />
+JSch allows you to connect to an sshd server and use port forwarding, X11 forwarding, file transfer, etc., and you can integrate its functionality into your own Java programs. JSch is licensed under <a href="http://www.jcraft.com/jsch/LICENSE.txt">BSD style license</a>.</p>
+<p>You can find more information about the library in <a href="http://www.jcraft.com/jsch/">http://www.jcraft.com/jsch/</a></p>
+<p><strong>Case scenario:</strong></p>
+<p>I want to send a SSH command to an UNIX server via some Java class. I want to the output of this command that I sent is shown in the user's screen through the web browser.</p>
+<p>Our environment uses a Private Key to allow SSH connections between one machine to another. In the code snippets you will see that the keys are passed through the method</p>
+<pre class="lang:java decode:true">jsch.addIdentity();</pre>
+<p>1st: the code snippet for the controller Application.java:</p>
+<pre class="lang:java decode:true" title="JSch with Play Framework - Example">package controllers;
+
+import oi.siebel.Control; //that's the Class I created to send the SSH commands to an UNIX shell
+import play.mvc.Controller;
+import play.mvc.Result;
+import java.util.*;
+import java.lang.*;
+
+public class Application extends Controller {
+
+        public static Result index() {
+
+            //variable that will receive the result of the method listOHSParam
+            String result = null;
+
+            try {
+                oi.siebel.Control a = new Control();
+                HashMap&lt;String, String[]&gt; result = null;
+                HashMap&lt;String, Integer&gt; result2 = null;
+                String[] result3 = null;
+                HashMap&lt;String, String&gt; result4 = null;
+                Iterator it = null;
+
+                resultado = a.listOHSParam(Control.EnvironmentOptions.NonProduction, "server01", "/siebel/MiddlewareHome/Oracle_WT1/instances/instance1");
+
+            }
+            catch (Exception ex){
+
+            }
+            finally {
+
+            }
+
+            return ok(result);
+        }
+
+}</pre>
+<p>2nd: the code snippet for the controller Control.java:</p>
+<pre class="lang:java decode:true">package controllers;
+
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+public class Control {
+
+    public enum EnvironmentOptions { Production, NonProduction };
+    private String user = "admin";
+    private String sshKeyPRD = "/home/workspace/testeJava/admin_open.ppk";
+    private String sshPassPRD = "#########"; //password hidden for security reasons
+    private String sshKeyHML = "/home/workspace/testeJava/admin_tst_priv_openssh.ppk";
+
+
+    //constructor
+    public Control() { }
+
+    private com.jcraft.jsch.JSch createJSchObjetc(EnvironmentOptions env) throws Exception {
+        try {
+            com.jcraft.jsch.JSch jsch = new JSch();
+            if (env == EnvironmentOptions.Production) {
+                jsch.addIdentity(sshKeyPRD,sshPassPRD);
+            }
+            else {
+                jsch.addIdentity(sshKeyHML);
+            }
+            return jsch;
+        }
+        catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    //=========================================================================================
+    // Metodo...: listOHSParam
+    // Descricao: List all parameters of the HTTPD.CONF file from OHS - Oracle HTTP Server
+    //=========================================================================================
+    public String listOHSParam(EnvironmentOptions env, String server, String ohsInstanceHome) throws Exception {
+
+        ChannelExec channel=null;
+        Session session=null;
+        String result="";
+
+        try{
+            // Create object to send the SSH command
+            JSch jsch = createJSchObjetc(env);
+
+            // Create object Session and do the SSH conection
+            session=jsch.getSession(user, server, 22);
+            session.setConfig("StrictHostKeyChecking", "no");
+            session.connect();
+
+            // Defines the command
+            String command = "cat " + ohsInstanceHome + "/config/OHS/ohs1/httpd.conf";
+
+            // Create object Channel
+            channel=(ChannelExec)session.openChannel("exec");
+            channel.setCommand(command);
+            ByteArrayOutputStream error=new ByteArrayOutputStream();
+            channel.setErrStream(error);
+            channel.connect();
+
+            DataInputStream dataIn = new DataInputStream(channel.getInputStream());
+            DataOutputStream dataOut = new DataOutputStream(channel.getOutputStream());
+
+            // Get the response and add to the HashMap
+            String line;
+            while ((line = dataIn.readLine()) != null) {
+                result += line + "\n";
+            }
+
+            dataIn.close();
+            dataOut.close();
+        }
+        catch (Exception e) {
+            throw new Exception(e);
+        }
+        finally {
+            if (channel != null){
+                channel.disconnect();
+                session.disconnect();
+            }
+        }
+
+        return result;
+    }
+
+}</pre>
+<p>Output of the command being displayed in a web browser:</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/03/play-JSch.png"><img class="aligncenter size-full wp-image-60" src="{{ site.baseurl }}/assets/play-JSch.png" alt="play-JSch" width="662" height="712" /></a></p>
+<p>That's it! See ya!</p>

@@ -1,0 +1,88 @@
+---
+layout: post
+title: Setting Up Your Oracle Fusion Middleware Development Environment - Part 1
+date: 2015-01-26 15:35:32.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- middleware
+- ofmw
+- oracle
+tags: []
+meta:
+  _edit_last: '1'
+author:
+  login: admin
+  email: me@andrealmar.com
+  display_name: Andre Almar
+  first_name: Andre
+  last_name: Almar
+---
+<p>Hi,</p>
+<p>This series of posts are targeted for the beginners who wants to jump into the Oracle Fusion Middleware world! First of all, if you want to start building things or playing around with Fusion Middleware you will need an environment. I will teach you how to build your OFMW environment who runs on your own laptop or desktop.</p>
+<p>&nbsp;</p>
+<p>I'm assuming that you already have VirtualBox (or VMWare) installed in your laptop / desktop. We gonna do a Virtual Machine with:</p>
+<ul>
+<li>OEL 7 (Oracle Linux)</li>
+<li>Weblogic 12c</li>
+<li>Oracle SOA 12c</li>
+<li>Oracle BPM 12c</li>
+</ul>
+<p>Maybe we will add other products in the OFMW stack.</p>
+<p>Let's start with installing our OS (Operational System) which in our case will be Oracle Enterprise Linux 7. So, follow along the steps below and be happy =)</p>
+<p>&nbsp;</p>
+<p>Boot your VM with the .iso file of OEL 7 and hit Install Oracle Linux 7.0</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-1.png"><img class="aligncenter wp-image-20 size-full" src="{{ site.baseurl }}/assets/oel-1.png" alt="oel-1" width="638" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>Select your language</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-2.png"><img class="aligncenter wp-image-21" src="{{ site.baseurl }}/assets/oel-2.png" alt="oel-2" width="708" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>Select your timezone</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-3.png"><img class="aligncenter wp-image-22" src="{{ site.baseurl }}/assets/oel-3.png" alt="oel-3" width="741" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>After that you have to set up some configurations before click Install.</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-4.png"><img class="aligncenter wp-image-23" src="{{ site.baseurl }}/assets/oel-4-300x200.png" alt="oel-4" width="748" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>Once you click Begin Installation, it starts to Install the Operational System. Then you must configure your User Settings like your User and password</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-5.png"><img class="aligncenter size-large wp-image-24" src="{{ site.baseurl }}/assets/oel-5-1024x636.png" alt="oel-5" width="720" height="447" /></a></p>
+<p>&nbsp;</p>
+<p>After the installation is done, click Reboot</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-6.png"><img class="aligncenter wp-image-25" src="{{ site.baseurl }}/assets/oel-6.png" alt="oel-6" width="742" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>Accept the License Agreement</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-7.png"><img class="aligncenter wp-image-26" src="{{ site.baseurl }}/assets/oel-7.png" alt="oel-7" width="743" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>If you want to register on the ULN (Oracle Unbreakable Linux Network) go ahead. I skipped at this time.</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-8.png"><img class="aligncenter wp-image-27" src="{{ site.baseurl }}/assets/oel-8.png" alt="oel-8" width="745" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>Login screen. Click on your username and after that fill with your password.</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-10.png"><img class="aligncenter wp-image-29" src="{{ site.baseurl }}/assets/oel-10.png" alt="oel-10" width="751" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>Welcome Screen, select your language</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-11.png"><img class="aligncenter wp-image-30" src="{{ site.baseurl }}/assets/oel-11.png" alt="oel-11" width="735" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>Done. Click on Start using Oracle Linux Server</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-12.png"><img class="aligncenter wp-image-31" src="{{ site.baseurl }}/assets/oel-12.png" alt="oel-12" width="747" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>Cool, now we have our OEL 7 installed. But let's add the Virtual Box Additions.They consist of device drivers and system applications that optimize the guest operating system for better performance and usability.</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-13.png"><img class="aligncenter wp-image-32" src="{{ site.baseurl }}/assets/oel-13.png" alt="oel-13" width="743" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>The Guest Additions offer the following features:</p>
+<p>Mouse pointer integration</p>
+<p>Shared folders</p>
+<p>Better video support</p>
+<p>Seamless windows</p>
+<p>Generic host/guest communication channels</p>
+<p>Time synchronization</p>
+<p>Shared clipboard</p>
+<p>and so on...</p>
+<p>For a complete list of all features and detailed explanation about them go to https://www.virtualbox.org/manual/ch04.html</p>
+<p>On Virtual Box go to <strong>Devices</strong> and then <strong>Guest Additions CD Image, </strong>the pop-up window below will appear</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-14.png"><img class="aligncenter wp-image-33" src="{{ site.baseurl }}/assets/oel-14.png" alt="oel-14" width="744" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>Wait for the installation to finish and you will have VirtualBox Guest Additions installed and ready to use.</p>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/01/oel-15.png"><img class="aligncenter wp-image-34" src="{{ site.baseurl }}/assets/oel-15.png" alt="oel-15" width="740" height="498" /></a></p>
+<p>&nbsp;</p>
+<p>That's it. Pretty easy hun?  On the part. 2 we will install the Weblogic Server.</p>
+<p>See ya</p>

@@ -1,13 +1,9 @@
-# If you have OpenSSL installed, we recommend updating
-# the following line to use "https"
-source 'http://rubygems.org'
+# A sample Gemfile
+source "https://rubygems.org"
 
-gem "middleman", "~> 3.4.0"
-gem "middleman-blog", "~> 3.5.3"
-gem 'middleman-livereload'
-gem "bitters"
-gem "bourbon"
-gem "neat"
-
-# For feed.xml.builder
-gem "builder", "~> 3.0"
+# gem "rails"
+gem "hpricot"
+gem "open_uri_redirections"
+gem "kramdown"
+gem "rouge"
+gem "jekyll-watch"

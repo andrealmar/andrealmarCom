@@ -1,0 +1,54 @@
+---
+layout: post
+title: Instalando Ruby 1.9.3 e Rails 3.2.7 no Mountain Lion
+date: 2012-08-06 16:04:12.000000000 -03:00
+type: post
+published: true
+status: publish
+categories: []
+tags: []
+meta:
+  _edit_last: '8405276'
+  _oembed_242864dbb0a3afe560e185aa6b573cf1: "{{unknown}}"
+author:
+  login: andrealmar
+  email: dreh@ymail.com
+  display_name: andrealmar
+  first_name: ''
+  last_name: ''
+---
+<p>Fala pessoal...enfim mais um post depois de um longo hiato! Resolvi brincar um pouco com Ruby on Rails (I need fresh air) e para fazer a instalação da linguagem Ruby e do framework Rails no novo Mountain Lion existem varias documentações e páginas na internet ensinando a se fazer isso, mas elas estão fragmentadas na minha opinião. Resolvi juntar tudo nesse post e espero que ajude vocês.</p>
+<p>Portanto aqui estão os passos para instalar o Rails no brand new Mountain Lion.</p>
+<p>Faça o download do XCode (se ainda não o tiver), execute-o e depois entre em Preferences depois Downloads. Faça a instalação do Command Line Tools como na figura abaixo:</p>
+<p><a href="http://andrealmar.files.wordpress.com/2012/08/rails1.png"><img class="aligncenter size-full wp-image-202" title="rails1" src="{{ site.baseurl }}/assets/rails1.png" alt="" width="593" height="412" /></a></p>
+<p>Terminada a instalação, feche o XCode e abra o Terminal. Execute o seguinte comando:</p>
+<p><strong>sudo chown -R 'seuNomedeUsuario' /usr/local</strong></p>
+<p>Execute a seguinte linha de comando:</p>
+<p><strong>curl https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash -s stable</strong></p>
+<p><a href="http://andrealmar.files.wordpress.com/2012/08/rails2.png"><img class="aligncenter size-full wp-image-205" title="rails2" src="{{ site.baseurl }}/assets/rails2.png" alt="" width="570" height="366" /></a></p>
+<p>Digite <strong>rvm -v</strong> para testar se a instalação ocorreu corretamente:</p>
+<p><a href="http://andrealmar.files.wordpress.com/2012/08/rails3.png"><img class="aligncenter size-full wp-image-207" title="rails3" src="{{ site.baseurl }}/assets/rails3.png" alt="" width="571" height="145" /></a></p>
+<p>Instale o Homebrew com o seguinte comando: <strong>/usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"</strong></p>
+<p><a href="http://andrealmar.files.wordpress.com/2012/08/rails5.png"><img class="aligncenter size-full wp-image-209" title="rails5" src="{{ site.baseurl }}/assets/rails5.png" alt="" width="573" height="85" /></a></p>
+<p>Execute um <strong>brew update</strong></p>
+<p><a href="http://andrealmar.files.wordpress.com/2012/08/rails6.png"><img class="aligncenter size-full wp-image-211" title="rails6" src="{{ site.baseurl }}/assets/rails6.png" alt="" width="434" height="80" /></a></p>
+<p>Agora você precisa instalar uma library chamada <span style="text-decoration:underline;">libksba</span>. Faça isso usando o <span style="text-decoration:underline;">Homebrew</span>:</p>
+<p><a href="http://andrealmar.files.wordpress.com/2012/08/rails7.png"><img class="aligncenter size-full wp-image-213" title="rails7" src="{{ site.baseurl }}/assets/rails7.png" alt="" width="383" height="15" /></a></p>
+<p>Instale o <span style="text-decoration:underline;">XQuartz</span>: <em>http://xquartz.macosforge.org/landing/ (faça o download do arquivo .dmg e instale normalmente)</em></p>
+<p>Depois de instalado ele (XQuartz) pede para você fazer log-off e login novamente. Faça isso!</p>
+<p>Por fim abra o Terminal novamente e digite <strong>rvm install 1.9.3</strong></p>
+<p><a href="http://andrealmar.files.wordpress.com/2012/08/rails9.png"><img class="aligncenter size-full wp-image-218" title="rails9" src="{{ site.baseurl }}/assets/rails9.png" alt="" width="364" height="14" /></a></p>
+<p>Se aparecer alguma mensagem de erro como essa:</p>
+<p><span style="color:#ff0000;">There has been an error while trying to extract the source.</span><br />
+<span style="color:#ff0000;"> Halting the installation.</span><br />
+<span style="color:#ff0000;"> There has been an error fetching the ruby interpreter.</span></p>
+<p>Tente rodar o seguinte comando: <strong>rvm get head</strong><br />
+E depois tente rodar o <strong>rvm install 1.9.3</strong> novamente.</p>
+<p>Feito isso é só setar a sua nova versão do ruby que você acabou de instalar: <strong>rvm --default use ruby-1.9.3-p194</strong></p>
+<p>E finalmente <strong>ruby -v</strong> para verificar se você setou corretamente a versão do ruby.</p>
+<p><a href="http://andrealmar.files.wordpress.com/2012/08/rails10.png"><img class="aligncenter size-full wp-image-221" title="rails10" src="{{ site.baseurl }}/assets/rails10.png" alt="" width="462" height="55" /></a></p>
+<p>Ufa...estamos quase acabando. Agora só falta instalar o Rails. Para instalar a última versão é só utilizar o comando: <strong>gem install rails</strong></p>
+<p><a href="http://andrealmar.files.wordpress.com/2012/08/rails11.png"><img class="aligncenter size-full wp-image-223" title="rails11" src="{{ site.baseurl }}/assets/rails11.png" alt="" width="374" height="44" /></a></p>
+<p>Terminada a instalação do Rails verifique com um <strong>rails -v</strong> se a versão está correta.</p>
+<p><a href="http://andrealmar.files.wordpress.com/2012/08/rails12.png"><img class="aligncenter size-full wp-image-230" title="rails12" src="{{ site.baseurl }}/assets/rails12.png" alt="" width="316" height="61" /></a></p>
+<p>Pronto! É isso! Depois (não sei quando hehe) volto com mais posts. See ya!</p>

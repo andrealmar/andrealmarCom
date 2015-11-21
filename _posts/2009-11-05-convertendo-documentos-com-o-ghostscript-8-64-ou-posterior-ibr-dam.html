@@ -1,0 +1,35 @@
+---
+layout: post
+title: Convertendo Documentos com o Ghostscript 8.64 ou posterior (IBR) (DAM)
+date: 2009-11-05 12:54:30.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- UCM
+tags:
+- ghostscript
+- ibr
+- Oracle
+- UCM
+meta:
+  _edit_last: '8405276'
+author:
+  login: andrealmar
+  email: dreh@ymail.com
+  display_name: andrealmar
+  first_name: ''
+  last_name: ''
+---
+<p>Então você tentou converter os documentos do ContentServer usando às versões mais novas do Ghostscript não é?</p>
+<p>Ah....e adivinha....DEU ERRO!!!!</p>
+<p>BEM aqui segue um "WORKAROUND"....mais conhecido como GAMBIARRA...para fazer o "bichinho" funcionar.</p>
+<p>Quando o Ghostscript v8.64 ou posterior é usado, são requeridas algumas variáveis adicionais no Intradoc.cfg para que o Content Server possa se comunicar corretamente com o Ghostscript.</p>
+<p>Neste exemplo o GhostScript 8.64 está instalado no seguinte diretório: C:\Ghostscript\gs\gpl\gs8.64</p>
+<p>EXPORT_CUSTOM_GS_LIB=GS_LIB<br />
+CUSTOM_GS_LIB=C:/Ghostscript/gs/gpl/gs8.64/lib<br />
+EXPORT_CUSTOM_GS_DLL=GS_DLL<br />
+CUSTOM_GS_DLL=C:/Ghostscript/gs/gpl/gs8.64/bin/gsdll32.dll</p>
+<p>A variável GS_LIB tem que ser setada no diretório /lib e a variável GS_DLL<br />
+tem que ser setada para onde está o arquivo gsdll32.dll.</p>
+<p>A Oracle promete que futuras versões do IBR irão suportar essas versões mais novas do Ghostscript sem precisarmos fazer esse "workaround".</p>

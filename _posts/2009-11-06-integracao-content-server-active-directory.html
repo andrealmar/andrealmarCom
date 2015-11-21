@@ -1,0 +1,176 @@
+---
+layout: post
+title: Integração - Content Server & Active Directory
+date: 2009-11-06 14:52:10.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- UCM
+tags:
+- active directory
+- Oracle
+- UCM
+meta:
+  _edit_last: '8405276'
+author:
+  login: andrealmar
+  email: dreh@ymail.com
+  display_name: andrealmar
+  first_name: ''
+  last_name: ''
+---
+<p>O Content Server é desenhado para 2 tipos de usuário e 2 tipos de administradores:</p>
+<p><strong>Consumers:</strong> Usuários que necessitam somente: procurar, achar, visualizar e imprimir arquivos.</p>
+<p><strong>Contributors:</strong> Usuários que precisam criar e revisar arquivos.</p>
+<p><strong>Administrators:</strong> Administradores que supervisionam uma instância inteira.</p>
+<p><strong>Sub-administrators:</strong> Administradores que supervisionam um subconjunto ou parte de uma instância.</p>
+<p>Em um cenário típico, a maioria dos usuários são <em>Consumers</em>. Esses usuários não necessitam de um <em>user name</em> e um <em>password</em> para acessar o Content Server a menos que alguma política de segurança seja aplicada aos arquivos. Para garantir a integridade dos arquivos, os <em>Contributors</em> necessitam de um <em>user name</em> e um <em>password</em> para fazer check-in de arquivos no sistema.</p>
+<p>Normalmente a maioria dos administradores são sub-administradores. Eles administram “porções” do software que correspondem às permissões que o <em>System Administrator</em> atribui a eles.</p>
+<p>O Oracle Content Server oferece 2 tipos de segurança no que diz respeito ao conteúdo: <em>security groups</em> (que são obrigatórios) e <em>accounts</em> (que são opcionais). Cada item de conteúdo é relacionado com um <em>security group</em>, e se você utilizar <em>accounts</em>, os items de conteúdo podem ser relacionados também com uma <em>account</em>. Aos usuários são atribuídos certos níveis de permissão (<em>Read, Write, Delete, </em>ou<em> Admin</em>) para cada <em>security group</em> e <em>account</em>, que lhes permitam trabalhar com apenas um item de conteúdo, na medida em que tenha permissões para o item de segurança do <em>security group</em> e/ou da <em>account.</em></p>
+<p><em><a rel="attachment wp-att-49" href="http://andrealmar.wordpress.com/2009/11/06/integracao-content-server-active-directory/ad_structure/"><img class="alignnone size-full wp-image-49" title="ad_structure" src="{{ site.baseurl }}/assets/ad_structure.jpg" alt="ad_structure" width="600" height="453" /></a></em></p>
+<p>Nesse caso um usuário pode ser atribuido a um grupo que tem um DN (<em>distinguished name</em>):</p>
+<p>cn=Project1 OU=TopSecret, OU=Accounts, OU=Stellent, dc=company, dc=com</p>
+<p><strong>USUÁRIOS EXTERNOS</strong></p>
+<p>Usuários que são autenticados através de mecanismos de segurança externa (Active Directory ou LDAP) são considerados usuários externos no Content Server. A primeira vez que o usuário logar no Content Server, ele será adicionado na tabela USERS do banco de dados, e os administradores do sistema podem ver informações sobre esse usuário através do <em>Repository Manager</em>. Entretanto, usuários externos não são incluidos nas <em>user lists</em>, como o campo Author por exemplo numa página de <em>Check-In</em>. Por padrão, a integração com os mecanismos de segurança externa mapeia somente alguns dados sobre o usuário (<em>user name, password, roles, </em>e<em> accounts</em>). Se você está usando integração com o  Active Directory ou LDAP, informações adicionais sobre o usuário, como endereço de e-mail ou local do usuário, podem ser mapeados para a página de administração do Content Server.</p>
+<p>Algumas restrições de segurança do Content Server:</p>
+<p>Web Server: IIS 5.0 ou mais recente.</p>
+<p>Usuários: Usuários devem estar em um grupo global ou local no domínio do Windows</p>
+<p><strong>PROCESSO DE AUTENTICAÇÃO NO ACTIVE DIRECTORY</strong></p>
+<p>Quando a segurança do Active Directory é integrada com o Content Server, o IIS e o filtro do webserver trabalham da seguinte maneira para autenticar um usuário:</p>
+<p>1. O cliente faz uma requisição para o IIS.</p>
+<p>2. Se alguma credencial é exigida para fazer essa requisição, o filtro do <em>web server</em> verifica se o usuário está definido como um usuário interno no Content Server.</p>
+<p>• Se o usuário é definido como um usuário local ou global do Content Server, as <em>roles</em>, <em>accounts</em>, e os atributos do usuário definidos no Content Server são usados.</p>
+<p>•Se o usuário não está definido, ou é definido somente como um usuário externo no Content Server, o filtro do <em>web server</em> aplica a seguinte sequência:</p>
+<p>a. O <em>web server</em> faz uma requisição para o Active Directory requerendo o <em>password</em> do usuário.</p>
+<p>b. O filtro do <em>web server</em> valida o <em>password</em> do usuário.</p>
+<p>c. Quando essa etapa é concluida com sucesso, o filtro do <em>web server</em> recupera o grupo ao qual pertence o usuário do servidor do Active Directory.</p>
+<p>d. O grupo do Active Directory ao qual o usuário pertence é mapeado para as <em>roles</em> e <em>accounts</em> do Content Server.</p>
+<p>e. O filtro do web server recupera informações sobre o usuário, como o e-mail e o tipo de usuário do servidor do Active Directory.</p>
+<p>3. Se essa requisição for uma CGI URL, a requisição é repassada ao Content Server junto com as <em>roles</em> e <em>accounts</em> do usuário.</p>
+<p>4. Se essa requisição for uma URL estática, o filtro do web server vai checar as <em>roles</em> e <em>accounts</em> do usuário para verificar se o usuário tem permissões suficientes para acessar aquela requisição.</p>
+<p><strong>MAPEANDO ROLES E ACCOUNTS</strong></p>
+<p>Quando o Active Directory está integrado com o Content Server, o grupo no Active Directory ao qual o usuário pretence, é mapeado junto com as <em>roles</em> e <em>accounts</em>:</p>
+<p>Se um nome do grupo é analisado como uma <em>role</em> e corresponde ao nome de um <em>role</em> no Content Server, é concedido ao usuário permissões baseadas nesse papel.</p>
+<p>Se o nome do grupo é analisado como uma <em>account</em>, o usuário é atribuído à essa <em>account</em>; você pode criar novas<em> accounts</em> de grupos do Active Directory dessa maneira.</p>
+<p>Se os nomes dos grupos no AD não baterem com as <em>roles</em> ou <em>accounts</em> no Content Server, eles serão ignorados.</p>
+<p>Permissões nas <em>accounts</em> são determinadas pelo nome do grupo em si ou pela permissão <em>default</em>.</p>
+<p><strong>GROUP FILTERING (ROLES E ACCOUNT PREFIXES)</strong></p>
+<p><em>Group Filtering</em> são usados para especificar quais partes dos grupos do Active Directory vão ser mapeados para as <em>roles</em> e <em>accounts</em> do Content Server.</p>
+<p>Quando o <em>Group Filtering</em> está habilitado no <em>Active Directory Configuration Page</em> os campos <em>Role Prefix e Account Prefix</em> são usados para filtrar cada nome de grupo de usuário. Você pode especificar um número ilimitado de <em>roles prefixes</em> e <em>account prefixes</em>, que na verdade são <em>substrings</em> que são comparadas com cada <em>group name</em> do Active Directory. Se um prefixo de uma <em>substring</em> é achado em um <em>group name</em>, o resto do <em>group name</em> depois desse prefixo (a um nivel mais baixo na árvore de diretórios) será entendido como uma <em>role </em>ou<em> account</em>.</p>
+<p>O resultado do mapeamento da <em>role e account</em> depende se a <em>setting: Full Group Names</em> estiver habilitada. Se estiver desabilitada, todos os <em>group names</em> serão entendidas como Content Server <em>roles</em>, de acordo com as configurações do <em>Full Group Names</em>. Cada <em>role prefix e account prefix</em> tem que ter um parâmetro <em>Depth</em>, que especifica número máximo dos níveis que podem existir entre o prefixo e a última unidade do <em>group name</em>, para que o grupo seja considerado uma <em>role</em> ou <em>account</em> válida.</p>
+<p>Coloque um asterisco (*) no parâmetro <em>depth</em> para que um determinado prefixo garanta um nome curto para qualquer grupo mapeado. Por exemplo, para um grupo com um DN CN=TestApp,OU=Apps,OU=Roles,[LdapSuffix]:</p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="288" valign="top"><em>Role Prefix </em></td>
+<td width="288" valign="top"><em>&gt; Role Name </em></td>
+</tr>
+<tr>
+<td width="288" valign="top">OU=Roles[4]</td>
+<td width="288" valign="top">&gt; Apps/TestApp</td>
+</tr>
+<tr>
+<td width="288" valign="top">OU=Roles[*4]</td>
+<td width="288" valign="top">&gt; TestApp</td>
+</tr>
+</tbody>
+</table>
+<p>O exemplo abaixo são prefixos de <em>roles e accounts</em>, onde a árvore de diretórios inclui uma OU chamada Stellent, com OU’s “filhas” chamadas de <em>Roles e Accounts</em>:</p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="576" valign="top">Role Prefix: OU=Roles,OU=Stellent</td>
+</tr>
+<tr>
+<td width="576" valign="top">Account   Prefix: OU=Accounts,OU=Stellent</td>
+</tr>
+</tbody>
+</table>
+<p>Nota: Não inclua espaços antes ou depois das vírgulas que separam os prefixos.</p>
+<p>O Content Server transforma qualquer % numa barra (/) para fazer estruturas hierárquicas. Por examplo, um <em>Group Name</em> FOO%BOO%BASH é mapeado para a account como FOO/BOO/BASH.</p>
+<p><strong>EXEMPLO DE MAPEAMENTO DE ROLES</strong></p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="576" valign="top"><span style="text-decoration:underline;">Group</span>: CN=admin,OU=Mgr,OU=Dept,OU=Roles,OU=Stellent,dc=company,dc=com</td>
+</tr>
+<tr>
+<td width="576" valign="top"><span style="text-decoration:underline;">Role Prefix</span>: OU=Roles,OU=Stellent[2]</td>
+</tr>
+<tr>
+<td width="576" valign="top">Group   Filtering Full Group Names Result</td>
+</tr>
+<tr>
+<td width="576" valign="top">Enabled   Enabled Role = Dept/Mgr/admin</td>
+</tr>
+<tr>
+<td width="576" valign="top">Enabled   Disabled Role = admin</td>
+</tr>
+<tr>
+<td width="576" valign="top">Disabled   Enabled Role = Stellent/Roles/Dept/Mgr/admin</td>
+</tr>
+<tr>
+<td width="576" valign="top">Disabled   Disabled Role = admin</td>
+</tr>
+</tbody>
+</table>
+<p><strong>EXEMPLO DE MAPEAMENTO DE ACCOUNT</strong></p>
+<p><strong> </strong></p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="576" valign="top"><span style="text-decoration:underline;">Group</span>:   CN=admin,OU=Mgr,OU=Dept,OU=Accounts,OU=Stellent,dc=company,dc=com</td>
+</tr>
+<tr>
+<td width="576" valign="top"><span style="text-decoration:underline;">Role   Prefix</span>:   OU=Accounts,OU=Stellent[2]</td>
+</tr>
+<tr>
+<td width="576" valign="top">Group Filtering Full Group Names Result</td>
+</tr>
+<tr>
+<td width="576" valign="top"></td>
+</tr>
+<tr>
+<td width="576" valign="top">Enabled   Enabled Account = Dept/Mgr/admin</td>
+</tr>
+<tr>
+<td width="576" valign="top"></td>
+</tr>
+<tr>
+<td width="576" valign="top">Enabled   Disabled Account = admin</td>
+</tr>
+<tr>
+<td width="576" valign="top"></td>
+</tr>
+<tr>
+<td width="576" valign="top">Disabled   Enabled Role = Stellent/Accounts/Dept/Mgr/admin</td>
+</tr>
+<tr>
+<td width="576" valign="top"></td>
+</tr>
+<tr>
+<td width="576" valign="top">Disabled   Disabled Role = admin</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PERMISSÕES EM ACCOUNTS</strong></p>
+<p>Permissões em <em>accounts</em> podem ser especificadas da seguinte maneira:</p>
+<p>Nas <em>account settings</em> especifique o <em>Default Network Accounts</em> na página <em>Active Directory Configuration</em>. O <em>default</em> é #none(RWDA), o que significa que os usuários do Active Directory tem permissões de Administrador para todos os items de conteúdo que não são ligados à uma <em>account</em>.</p>
+<p><strong> </strong></p>
+<p><strong>Segue abaixo uma série de passos para integrar o UCM (UNIVERSAL CONTENT MANAGEMENT) com o  Microsoft Active Directory</strong></p>
+<p>1. Criar uma OU no Active Directory chamada Stellent</p>
+<p>2. Criar uma sub-OU debaixo de Stellent chamada Roles</p>
+<p>3. Debaixo de Roles, crie os Security Groups do AD com o mesmo nome das Roles do UCM (ex. contributor, admin)</p>
+<p>4. Na Home Page do Content Server, abra a página Admin Server</p>
+<p>5. Abra o Content Server instance que sera integrada ao AD</p>
+<p>6. Abra a página Internet Configuration</p>
+<p>7. Na opção Microsoft Security escolha a opção Active Directory Security</p>
+<p>8. Restarte o Content Server</p>
+<p>9. No Content Server Home Page, debaixo de Administration abra a página Filter Administration</p>
+<p>10. No Active Directory Security, clique no link Configure</p>
+<p>11. Abaixo de Role Prefix, adicione o seguinte “OU=Roles,OU=Stellent”</p>
+<p>12. Clique em Update</p>
+<p>13. Restarte o Content Server e o IIS</p>
+<p><em><br />
+</em></p>

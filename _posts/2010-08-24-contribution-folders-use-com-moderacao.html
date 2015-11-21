@@ -1,0 +1,39 @@
+---
+layout: post
+title: Contribution Folders - Use com moderação!
+date: 2010-08-24 08:59:56.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- Contribution Folders
+- Dicas e Truques
+- UCM
+tags: []
+meta:
+  _edit_last: '8405276'
+  _wp_old_slug: ''
+  _oembed_93e6027e14bd4ff4e52cd9268261afc1: "{{unknown}}"
+  _oembed_7e0938218bb10d0860f4ac5825bb59d6: "{{unknown}}"
+author:
+  login: andrealmar
+  email: dreh@ymail.com
+  display_name: andrealmar
+  first_name: ''
+  last_name: ''
+---
+<p>As famosas "<em>Contribution Folders</em>"....peraí....você disse : <em>Folders</em>, right?</p>
+<p>Sim..."<em>Folders</em>"..ou "Pastas"...mas não é bem o que você está pensando...</p>
+<p>Muita gente se confunde com elas...mas também pudera...não é todo mundo que é Consultor UCM e conhece a fundo a solução.</p>
+<p>As <em>Contribution Folders</em> se parecem com os diretórios ou pastas do seu desktop, veja bem...eu disse que se "parecem"....mas elas definitivamente não são "a mesma coisa".</p>
+<p><em>Contribution Folders</em> é um nome bonitinho para um ponto de acesso WebDAV. Ele permite que você faça drag-n-drop de arquivos diretamente para o Content Server através do Desktop Integration.</p>
+<p>Só que o Content Server não é igual ao Filesystem do seu computador...é um sistema de gerenciamento de conteúdo baseado em metadados, ok? (Content Server 101  =p)</p>
+<p>Então...as <em>Contribution Folders</em> são "Pastas Virtuais". Elas não existem fisicamente!!! Se você for olhar no seu Filesystem, elas não estarão lá. A <em>Contribution Folder</em> é apenas um metadado a mais, associado a um determinado arquivo, com algumas peculiaridades.</p>
+<ul>
+<li>Você não pode ter mais de uma <em>Folder</em> atribuída a um arquivo.</li>
+<li>Os items dentro de uma <em>Folder</em> devem ter nomes únicos. Se você tentar arrastar um arquivo para uma <em>Folder</em>, que já contenha um arquivo com aquele mesmo nome, esse item se tornará uma revisão do arquivo existente.</li>
+<li>Arquivos podem ser "deletados" da <em>Folder</em>, ou seja, eles são movidos para a Lixeira. Entretanto, eles continuam aparecendo nas Buscas, por exemplo. Para remover o item completamente, vá até a lixeira e apague o arquivo.</li>
+<li>Cada <em>Folder</em> torna a performance do Content Server mais lenta. Há um limite default de 1000 <em>Folders</em>, se você ultrapassar este limite...bem...não diga que eu não avisei, rs.</li>
+<li>Não há uma maneira de controlar o ID das <em>Folders (</em>É sequencial e o próprio Content Server se encarrega disso<em>)</em>. Quando você fizer uma migração, por exemplo, não crie as <em>Folders</em> na sua nova instância, porque senão, fatalmente você vai criá-las com ID's diferentes e na hora de migrar os arquivos de uma instância antiga para uma nova, vai dar probleminha...Eu falo um pouco mais sobre isso em meu post sobre Migração do Content Server (<a href="http://andrealmar.wordpress.com/2009/08/11/ucm-tutorial-de-migracao/">http://andrealmar.wordpress.com/2009/08/11/ucm-tutorial-de-migracao/</a>).</li>
+</ul>
+<p>Bom...por hoje é só pessoal....Até a próxima.</p>

@@ -1,0 +1,53 @@
+---
+layout: post
+title: Setting Up Your Oracle Fusion Middleware Development Environment – Part 2
+date: 2015-02-02 18:26:58.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- middleware
+- ofmw
+- oracle
+tags: []
+meta:
+  _edit_last: '1'
+author:
+  login: admin
+  email: me@andrealmar.com
+  display_name: Andre Almar
+  first_name: Andre
+  last_name: Almar
+---
+<p>Hi folks, let's continue to build our OFMW Development Environment.</p>
+<p>Now we are going to install JAVA. First of all download the latest JDK on the Oracle website. In this case is the<strong><em> jdk-7u72-linux-x64.rpm</em></strong></p>
+<p>Run the command</p>
+<pre class="lang:sh decode:true ">sudo rpm -ivh  jdk-7u72-linux-x64.rpm</pre>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/02/jdk-001.png"><img class="aligncenter wp-image-49 size-full" src="{{ site.baseurl }}/assets/jdk-001.png" alt="jdk-001" width="775" height="248" /></a></p>
+<p>After that JAVA will be installed on your machine. Update your PATH file by opening<code></code></p>
+<pre class="lang:sh decode:true "> /etc/profile</pre>
+<p><code></code> file by this command:</p>
+<pre class="lang:sh decode:true ">vim /etc/profile</pre>
+<p>and paste the following at the end of the file:</p>
+<pre class="lang:sh decode:true">JAVA_HOME=/usr/local/java/jdk1.7.0_72 
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin 
+export JAVA_HOME 
+export PATH</pre>
+<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/02/jdk-005.png"><img class="aligncenter size-full wp-image-51" src="{{ site.baseurl }}/assets/jdk-005.png" alt="jdk-005" width="814" height="601" /></a></p>
+<p>Now you have to tell the system that the new Oracle Java version is available by the following commands:</p>
+<pre class="lang:sh decode:true ">sudo update-alternatives --install "/usr/bin/java" "java" "/usr/java/jdk1.7.0_72/bin/java" 1
+sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/java/jdk1.7.0_72/bin/javac" 1
+sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/java/jdk1.7.0_72/bin/javaws" 1</pre>
+<p>&nbsp;</p>
+<p>Then  make sure you make Oracle Java JDK as default by this following commands:</p>
+<pre class="lang:sh decode:true">sudo update-alternatives --set java /usr/local/java/jdk1.7.0_72/bin/java 
+sudo update-alternatives --set javac /usr/local/java/jdk1.7.0_72/bin/javac 
+sudo update-alternatives --set javaws /usr/local/java/jdk1.7.0_72/bin/javaws</pre>
+<p>Reload your system PATH /etc/profile by running this command:</p>
+<pre class="lang:sh decode:true ">source /etc/profile</pre>
+<p>Reboot your system and after that check your version of JAVA by this command:</p>
+<pre class="lang:sh decode:true ">java -version</pre>
+<pre class="lang:sh decode:true"> java version "1.7.0_72" 
+Java(TM) SE Runtime Environment (build 1.7.0_72-b26) 
+Java HotSpot(TM) Server VM (build 25.20-b23, mixed mode)</pre>
+<p>That's all.</p>

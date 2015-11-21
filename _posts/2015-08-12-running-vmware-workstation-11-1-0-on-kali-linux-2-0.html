@@ -1,0 +1,61 @@
+---
+layout: post
+title: Running VMware Workstation 11.1.0 on Kali Linux 2.0
+date: 2015-08-12 14:28:48.000000000 -03:00
+type: post
+published: true
+status: publish
+categories: []
+tags: []
+meta:
+  cwp_bar_icon: ''
+  option_overall_score: '0'
+  _edit_last: '1'
+  cwp_rev_product_name: ''
+  cwp_rev_price: ''
+  cwp_meta_box_check: 'No'
+  cwp_image_link: image
+  cwp_product_affiliate_text: ''
+  cwp_product_affiliate_link: ''
+  cwp_product_affiliate_text2: ''
+  cwp_product_affiliate_link2: ''
+  option_1_content: ''
+  option_1_grade: ''
+  option_2_content: ''
+  option_2_grade: ''
+  option_3_content: ''
+  option_3_grade: ''
+  option_4_content: ''
+  option_4_grade: ''
+  option_5_content: ''
+  option_5_grade: ''
+  cwp_rev_product_image: ''
+  cwp_option_1_pro: ''
+  cwp_option_1_cons: ''
+  cwp_option_2_pro: ''
+  cwp_option_2_cons: ''
+  cwp_option_3_pro: ''
+  cwp_option_3_cons: ''
+  cwp_option_4_pro: ''
+  cwp_option_4_cons: ''
+  cwp_option_5_pro: ''
+  cwp_option_5_cons: ''
+author:
+  login: admin
+  email: me@andrealmar.com
+  display_name: Andre Almar
+  first_name: Andre
+  last_name: Almar
+---
+<p>Trouble in running VMware Workstation 11.1.0 on the new Kali Linux 2.0?</p>
+<p>Here is what you have to do:</p>
+<p>First, install VMware Workstation and then execute the commands below.</p>
+<pre><code>curl http://pastie.org/pastes/9934018/download -o /tmp/vmnet-3.19.patch
+cd /usr/lib/vmware/modules/source
+tar -xf vmnet.tar
+patch -p0 -i /tmp/vmnet-3.19.patch
+tar -cf vmnet.tar vmnet-only
+rm -r *-only
+vmware-modconfig --console --install-all</code></pre>
+<p>Now you are good to go.</p>
+<p>&nbsp;</p>

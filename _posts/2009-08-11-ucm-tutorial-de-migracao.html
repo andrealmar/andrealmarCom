@@ -1,0 +1,68 @@
+---
+layout: post
+title: Oracle UCM (Universal Content Management) - Tutorial de Migração
+date: 2009-08-11 16:58:51.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- UCM
+tags:
+- Oracle
+- UCM
+meta:
+  _edit_last: '8405276'
+  _oembed_e197e0fbb953a5f86f623d8f15e12ee1: "{{unknown}}"
+  _oembed_9dd7d8112e21edd42cd08d35215c2090: "{{unknown}}"
+  _oembed_b2b11ffec095461c89551a8d8abbd7a4: "{{unknown}}"
+  _oembed_682ec6e00b8599fb0fe0a8ef9ae444a4: "{{unknown}}"
+author:
+  login: andrealmar
+  email: dreh@ymail.com
+  display_name: andrealmar
+  first_name: ''
+  last_name: ''
+---
+<p>1)Crie instâncias de desenvolvimento, teste (homologação) e produção com nomes de instância diferentes (por exemplo: ucmdev, ucmteste e ucmprod). Se todas se chamarem UCM, o servidor vai se complicar na hora que voce fizer uma importação (ele vai achar que você está restaurando um backup, e não importando de outra instância).</p>
+<p>2)Para o componente Folders, existe uma configuração em que você define o ID inicial das pastas.<br />
+<img src="{{ site.baseurl }}/assets/folders_g_-_configuration1.jpg" alt="" /><br />
+Abra o Assistente de Componentes</p>
+<p><img src="{{ site.baseurl }}/assets/folders_g_-_configuration2.jpg" alt="" /><br />
+Uma vez aberto o Assistente de Componentes, selecione o componente no qual iremos trabalhar em cima dele, no caso, o Folders_g.</p>
+<p><img src="{{ site.baseurl }}/assets/folders_g_-_configuration3.jpg" alt="" /><br />
+Clique na aba Install/Uninstall Settings e selecione a última linha que se chama InitialFolderID.<br />
+É nessa propriedade que iremos definir o prefixo do Content ID de forma diferente para cada instância, para evitar conflito de Content ID durante uma importação/replicação.</p>
+<p>Cada pasta tem um ID numérico, que normalmente começa em 2. Este ID é um metadado do documento (xCollectionID), e ele é guardado apenas na forma numérica.</p>
+<p>Imagine que você tem um servidor aonde a pasta com ID = 6 é CONTRATOS e a pasta com ID = 7 é PROPOSTAS.</p>
+<p>Se você exportar todos os CONTRATOS e PROPOSTAS para uma nova instância, aonde a pasta com ID = 6 é NOTAS FISCAIS e não existe pasta com ID = 7, todos os CONTRATOS vão aparecer na pasta de NOTAS FISCAIS e as PROPOSTAS não vão aparecer em nenhuma pasta (embora todos os documentos estarão no repositório, uma vez que o ID da pasta é apenas um metadado). Por isso o ideal é que no ambiente de desenvolvimento as pastas comecem com ID = 1, ID = 1000 em teste (homologação), e ID = 3000 em producao, (ou alguma coisa assim, para você ter uma janela que vai evitar o <em>overlap</em>).</p>
+<p><img src="{{ site.baseurl }}/assets/folders_g_-_configuration4.jpg" alt="" /></p>
+<p><strong>LEMBRE-SE<br />
+Defina o prefixo do Content ID de forma diferente para cada instância, para evitar conflito de Content ID durante uma importação/replicação.</strong></p>
+<p>3)Se você for usar o Site Studio, evite ter o banco de dados como repositório de documentos. Você pode criar regras para armazenar todos os documentos "normais" no banco e apenas o conteúdo do Site Studio na <em>File System</em>.</p>
+<p>4) Agora iremos exportar a Estrutura de Pastas.<br />
+<img src="{{ site.baseurl }}/assets/folder_archive_configuration1.jpg" alt="" width="667" height="489" /></p>
+<p>Vá ao menu Administração, depois clique em Configuração de Arquivos de Pastas</p>
+<p><img src="{{ site.baseurl }}/assets/folder_archive_configuration2.jpg" alt="" /></p>
+<p>Feito isso irá aparecer uma tela como acima mostrado. Dê um nome para o Archiver da Estrutura de Pastas que será feito e selecione quais as pastas você quer importar. Feito isso é só clicar em ADD (Adicionar).</p>
+<p><img src="{{ site.baseurl }}/assets/folder_archive_configuration3.jpg" alt="" /><br />
+Depois vá ao Menu Administração novamente e clique agora em Admin Applets (Miniaplicativos de Administração)</p>
+<p><img src="{{ site.baseurl }}/assets/folder_archive_configuration4.jpg" alt="" /><br />
+Clique na opção Archiver (Arquivador) e espere uma tela se abrir.</p>
+<p><img src="{{ site.baseurl }}/assets/folder_archive_configuration5.jpg" alt="" /><br />
+Uma tela como a mostrada acima se abrirá e você deverá selecionar a Estrutura de Pastas recém criada que você irá exportar. Note que na Description (Descrição) do Archiver está escrito: Archiver with folder structures.<br />
+Ou seja temos a certeza que a exportação que será feita é da Estrutura de Pastas.</p>
+<p><img src="{{ site.baseurl }}/assets/folder_archiver_configuration6.jpg" alt="" /><br />
+O que iremos fazer agora é entrar dentro da pasta “archives” no diretório aonde está instalado o UCM e copiar essa pasta, para a pasta “archives” do outro servidor aonde iremos fazer a migração.<br />
+Mas antes de fazer essa cópia iremos no servidor aonde iremos fazer a migração e criaremos um “archiver” com o mesmo nome: No exemplo aqui: “folderarchiver1”.<br />
+Você a esta altura já sabe fazer isso. É só seguir os passos ditos anteriormente nesse mesmo tutorial.</p>
+<p>Após exportar a estrutura de pastas vamos agora fazer a Exportação\Importação dos arquivos e tabelas do sistema.</p>
+<p><a href="http://andrealmar.wordpress.com/?attachment_id=45"><img class="alignnone size-full wp-image-45" title="migra1" src="{{ site.baseurl }}/assets/migra1.jpg" alt="migra1" width="390" height="336" /></a></p>
+<p>Crie um Archiver com um nome qualquer.</p>
+<p><a href="http://andrealmar.wordpress.com/?attachment_id=46"><img class="alignnone size-full wp-image-46" title="migra2" src="{{ site.baseurl }}/assets/migra2.jpg" alt="migra2" width="461" height="336" /></a></p>
+<p>Depois clique em Editar da Aba GERAL e selecione a opção EXPORTAR SOMENTE TABELAS.</p>
+<p>Isso irá fazer com que o Archiver exporte as tabelas do sistema.</p>
+<p>Feito isso vá para o servidor aonde iremos importar essa estrutura de tabelas que acabamos de criar e crie um Archiver com o mesmo nome.</p>
+<p>Feito isso copie a pasta gerada pelo Archiver do servidor aonde você EXPORTOU os dados, para o servidor aonde você irá IMPORTAR os dados.</p>
+<p>Lembre-se que esta pasta encontra-se em D:\oracle\ucm\server\archives no servidor HML.</p>
+<p>Após isso clique em Ações/IMPORTAR para que o sistema possa ler o Archiver que você acabou de copiar e começar a importação das tabelas.</p>
+<p>Obrigado ao Denis da Oracle pela ajuda nesse post!</p>

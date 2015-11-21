@@ -1,0 +1,75 @@
+---
+layout: post
+title: How to configure proxy in Play Framework
+date: 2015-06-22 13:56:59.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- java
+- play framework
+tags: []
+meta:
+  cwp_bar_icon: ''
+  option_overall_score: '0'
+  _edit_last: '1'
+  cwp_rev_product_name: ''
+  cwp_rev_price: ''
+  cwp_meta_box_check: 'No'
+  cwp_image_link: image
+  cwp_product_affiliate_text: ''
+  cwp_product_affiliate_link: ''
+  cwp_product_affiliate_text2: ''
+  cwp_product_affiliate_link2: ''
+  option_1_content: ''
+  option_1_grade: ''
+  option_2_content: ''
+  option_2_grade: ''
+  option_3_content: ''
+  option_3_grade: ''
+  option_4_content: ''
+  option_4_grade: ''
+  option_5_content: ''
+  option_5_grade: ''
+  cwp_rev_product_image: ''
+  cwp_option_1_pro: ''
+  cwp_option_1_cons: ''
+  cwp_option_2_pro: ''
+  cwp_option_2_cons: ''
+  cwp_option_3_pro: ''
+  cwp_option_3_cons: ''
+  cwp_option_4_pro: ''
+  cwp_option_4_cons: ''
+  cwp_option_5_pro: ''
+  cwp_option_5_cons: ''
+author:
+  login: admin
+  email: me@andrealmar.com
+  display_name: Andre Almar
+  first_name: Andre
+  last_name: Almar
+---
+<p>Hello ALL,</p>
+<p>If you are struggling to get Play Framework up and running and you are behind a proxy server here is the solution.</p>
+<p>Go to your Play directory (in my case was:<em> /home/andrealmar/softwares/play</em>)</p>
+<p>Create the file <strong>activatorconfig.txt</strong> in<em> ~/.activator/</em> directory</p>
+<pre class="lang:sh decode:true ">vim ~/.activator/activatorconfig.txt</pre>
+<p>Put the configs below inside your activatorconfig.txt</p>
+<pre class="lang:sh decode:true"># This are the proxy settings we use for activator
+# Multiple proxy hosts can be used by separating them with a '|' sign
+# Do not enclose the proxy host(s) in quotes
+
+-Dhttp.proxyHost=<strong>99.99.99.99 - your proxy IP/host</strong>
+-Dhttp.proxyPort=<strong>82 - your proxy PORT</strong>
+-Dhttps.proxyHost=<strong>99.99.99.99 - your proxy IP/host</strong>
+-Dhttps.proxyPort=<strong>82 - your proxy PORT</strong>
+# Here we configure the hosts which should not go through the proxy.  You should include your private network, if applicable.
+-Dhttp.nonProxyHosts="localhost|127.0.0.1"
+# These are commented out, but if you need to use authentication for your proxy, please fill these out.
+-Dhttp.proxyUser=<strong>your network/proxy user</strong>
+-Dhttp.proxyPassword=<strong>your network/proxy password</strong>
+-Dactivator.timeout=20s</pre>
+<p>&nbsp;</p>
+<p>And that's it. Now you can use the <em>activator run</em> command and it will pass through your proxy without any problems.<br />
+See ya!</p>
+<p>&nbsp;</p>

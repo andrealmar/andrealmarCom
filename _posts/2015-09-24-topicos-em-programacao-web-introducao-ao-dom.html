@@ -1,0 +1,90 @@
+---
+layout: post
+title: "[Tópicos em Programação WEB] Introdução ao DOM"
+date: 2015-09-24 16:33:32.000000000 -03:00
+type: post
+published: true
+status: publish
+categories:
+- javascript
+- tópicos em programação web
+- web
+tags: []
+meta:
+  cwp_bar_icon: ''
+  option_overall_score: '0'
+  _edit_last: '1'
+  cwp_rev_product_name: ''
+  cwp_rev_price: ''
+  cwp_meta_box_check: 'No'
+  cwp_image_link: image
+  cwp_product_affiliate_text: ''
+  cwp_product_affiliate_link: ''
+  cwp_product_affiliate_text2: ''
+  cwp_product_affiliate_link2: ''
+  option_1_content: ''
+  option_1_grade: ''
+  option_2_content: ''
+  option_2_grade: ''
+  option_3_content: ''
+  option_3_grade: ''
+  option_4_content: ''
+  option_4_grade: ''
+  option_5_content: ''
+  option_5_grade: ''
+  cwp_rev_product_image: ''
+  cwp_option_1_pro: ''
+  cwp_option_1_cons: ''
+  cwp_option_2_pro: ''
+  cwp_option_2_cons: ''
+  cwp_option_3_pro: ''
+  cwp_option_3_cons: ''
+  cwp_option_4_pro: ''
+  cwp_option_4_cons: ''
+  cwp_option_5_pro: ''
+  cwp_option_5_cons: ''
+author:
+  login: admin
+  email: me@andrealmar.com
+  display_name: Andre Almar
+  first_name: Andre
+  last_name: Almar
+---
+<p>O que é DOM?</p>
+<p>DOM significa  DOCUMENT OBJECT MODEL. Tá mas e daí?</p>
+<p style="text-align: left;">Em termos gerais o DOM é uma API (application programming interface) que serve para interagirmos com documentos HTML e XML.</p>
+<p style="text-align: left;">Provavelmente só esta explicação é um pouco confusa. Mas estamos aqui para explicar isso para você  meu caro leitor. Vamos aprender como o DOM é estruturado e como usar os métodos corretos em Javascript para manipulá-lo.</p>
+<p style="text-align: left;">A melhor maneira de pensarmos a respeito do DOM, é que ele é uma árvore de objetos aninhados. Uma analogia seria: Pense no DOM como uma árvore genealógica.</p>
+<p>[caption id="attachment_169" align="aligncenter" width="300"]<a href="http://andrealmar.com/blog/wp-content/uploads/2015/09/genealogical_tree.jpg"><img class="size-medium wp-image-169" src="{{ site.baseurl }}/assets/genealogical_tree-300x230.jpg" alt="Árvore Genealógica" width="300" height="230" /></a> Árvore Genealógica[/caption]</p>
+<p style="text-align: left;">Cada parte de um documento HTML é representado por um objeto dentro do DOM.</p>
+<p style="text-align: left;">O DOM possui objetos para representar Elementos HTML (tags), Texto (conteúdo das tags), Estilos (como este texto é apresentado para o usuário), assim como objetos mais alto nível, como interação com o usuário através de “eventos”.</p>
+<p style="text-align: left;">O DOM é organizado hierarquicamente, o que significa que um objeto DOM para o elemento HEAD, está embaixo do elemento HTML, que por sua vez está embaixo do objeto Document.</p>
+<pre class="lang:xhtml decode:true">Document
+  &lt;html&gt;
+    &lt;head&gt;
+      &lt;title&gt;
+        Árvore DOM
+      &lt;script&gt;
+        Código Javascript
+
+E assim por diante...</pre>
+<p style="text-align: left;">A melhor maneira de observarmos o DOM é ver como ele imita uma estrutura HTML.</p>
+<p style="text-align: left;">No HTML as tags estão aninhadas umas nas outras. Ex:</p>
+<pre class="lang:xhtml decode:true">&lt;body&gt;
+  &lt;div id="artigo"&gt;
+    &lt;p&gt;Bla bla bla bla bla&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</pre>
+<p style="text-align: left;">No exemplo acima a <em>tag</em> <strong>p</strong> está aninhada dentro da <em>tag</em> <strong>div </strong>que por sua vez está aninhada dentro da <em>tag</em> <strong>body</strong>, que por sua vez está aninhada dentro da <em>tag</em> <strong>html</strong>.</p>
+<p style="text-align: left;">Lembra da analogia do DOM com uma árvore genealógica? No DOM nós identificamos estas relações (aninhamentos), justamente como uma árvore genealógica. Uma<em> tag</em> que está aninhada à outra é chamada de <strong>“filha”</strong> desta outra <em>tag</em> que se torna o seu<strong>"pai"</strong>.</p>
+<p>Ex:</p>
+<pre class="lang:js decode:true ">var bodyTag = document.body;
+var divTag  = document.body.firstChild;
+var pTag    = document.body.firstChild.firstChild;</pre>
+<p style="text-align: left;">O objeto <em>Document</em>, representa o conteúdo de um documento HTML. Só que o objeto <em>Document</em> não é o nível mais superior do DOM. O nível mais superior do DOM é o objeto <b>Window</b>.</p>
+<p style="text-align: left;">Por conta disso, o objeto <em>Window</em>, é o escopo <i>global</i> do DOM - ou seja, qualquer objeto no DOM pertence, ou está contido no objeto <em>Window</em>. Este objeto <em>Window</em>, representa uma janela aberta do seu browser (navegador), por exemplo.</p>
+<p>[caption id="attachment_173" align="aligncenter" width="300"]<a href="http://andrealmar.com/blog/wp-content/uploads/2015/09/objectDocument_objectWindow.png"><img class="wp-image-173 size-medium" src="{{ site.baseurl }}/assets/objectDocument_objectWindow-300x245.png" alt="objectDocument_objectWindow" width="300" height="245" /></a> Azul = objeto Window (browser)      Laranja = documento HTML (objeto Document)[/caption]</p>
+<p>&nbsp;</p>
+<p style="text-align: left;">Como já observamos, o DOM não é uma linguagem. O DOM foi desenvolvido para ser independente de qualquer linguagem de programação. Para manipular o DOM usamos uma linguagem de programação. Geralmente em se tratando de programação WEB nós usamos Javascript. Assim nós temos acesso à estrutura, estilo e conteúdo de um documento através do DOM e com o JavaScript poderemos manipulá-los.</p>
+<p style="text-align: left;">Existem muito mais coisas a se falar sobre o nosso prezado DOM. Mas isso fica para outro post. Abs,</p>
+<p>See ya!</p>

@@ -1,0 +1,114 @@
+---
+layout: post
+title: Python script - Restore Siebel 6 attachments
+date: 2015-11-19 02:36:28.000000000 -02:00
+type: post
+published: true
+status: publish
+categories:
+- oracle
+- python
+- scripts
+- siebel
+tags: []
+meta:
+  cwp_bar_icon: ''
+  option_overall_score: '0'
+  _edit_last: '1'
+  cwp_rev_product_name: ''
+  cwp_rev_price: ''
+  cwp_meta_box_check: 'No'
+  cwp_image_link: image
+  cwp_product_affiliate_text: ''
+  cwp_product_affiliate_link: ''
+  cwp_product_affiliate_text2: ''
+  cwp_product_affiliate_link2: ''
+  option_1_content: ''
+  option_1_grade: ''
+  option_2_content: ''
+  option_2_grade: ''
+  option_3_content: ''
+  option_3_grade: ''
+  option_4_content: ''
+  option_4_grade: ''
+  option_5_content: ''
+  option_5_grade: ''
+  cwp_rev_product_image: ''
+  cwp_option_1_pro: ''
+  cwp_option_1_cons: ''
+  cwp_option_2_pro: ''
+  cwp_option_2_cons: ''
+  cwp_option_3_pro: ''
+  cwp_option_3_cons: ''
+  cwp_option_4_pro: ''
+  cwp_option_4_cons: ''
+  cwp_option_5_pro: ''
+  cwp_option_5_cons: ''
+author:
+  login: admin
+  email: me@andrealmar.com
+  display_name: Andre Almar
+  first_name: Andre
+  last_name: Almar
+---
+<p>Hi all,</p>
+<p>Here is my solution to make the Siebel 6.3 attachments restore easier. I did this script that I'm sharing with you guys. Enjoy!</p>
+<p>It is also on my Github: <a href="https://github.com/andrealmar/scripts/blob/master/restoreSiebelAttachments.py">https://github.com/andrealmar/scripts/blob/master/restoreSiebelAttachments.py</a></p>
+<pre class="lang:python decode:true ">import os
+import glob
+import sys
+import cx_Oracle
+
+
+row_id = raw_input("Enter ROW_ID: ")
+row_id = str(row_id)
+
+SQL = ''' 
+SELECT 
+      FILE_REV_NUM
+   FROM 
+       SIEBEL.S_ACCNT_ATT
+   WHERE
+      (row_id = '%s')
+''' % (row_id)
+
+#connection with Oracle DB
+print "Connecting with the Database..."
+connstr = 'USERNAME/PASSWORD@HOST:PORT/SERVICENAME'
+connection = cx_Oracle.connect(connstr)
+
+if connection:
+    print "Database connection SUCESS..."
+else:
+    print "Database connection ERROR"
+
+cursor = connection.cursor()
+
+for row in cursor.execute(SQL):
+    print "FILE_REV_NUMBER: %s" % row
+
+cursor.close()
+connection.close()
+
+
+print "Searching for .SAF file"
+
+for filename in glob.glob('\\NETWORK-PATH\*\S_ACCNT_ATT_%s_%s.SAF' % (row_id, row[0])):
+    print "FILE FOUND: \t", filename.split('\')[-1]
+    arquivo = filename.split('\')[-1]
+    arquivo = str(arquivo)
+    #split the filepath
+    Dir = filename.split('\')[-2]
+    print "FOLDER FOUND: %s" % Dir
+    print "copying files..."
+
+
+source = "\\NETWORK-PATH-ORIGIN\%s\%s" % (Dir, arquivo)
+target = "\\NETWORK-PATH-DESTINATION\%s" % (Dir)
+
+output = os.system ("""xcopy "%s" "%s" """ % (source, target))
+
+print "ATTACHMENTS RESTORED!!!"</pre>
+<p>What the script does? You pass the ROW_ID and the script takes care of the rest. It will look at the database, find the FILE_REV_NUMBER, look at the purge folder and restore the attachment based on the ROW_ID that you entered.</p>
+<p>&nbsp;</p>
+<p>Any questions? Please leave a comment below.</p>
