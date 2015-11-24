@@ -69,8 +69,7 @@ print "ATTACHMENTS RESTORED!!!"
 {% endhighlight %}
 
 
-What the script does? You pass the ROW_ID and the script takes care of the rest. It will look at the database, find the FILE_REV_NUMBER, look at the purge folder and restore the attachment based on the ROW_ID that you entered.
-
+What the script does? You pass the ROW_ID and the script takes care of the rest. It will look at the database, find the FILE_REV_NUMBER, look at the purge folder and restore the attachment based on the ROW_ID that you entered.  
 Any questions? Please leave a comment below.
 
 [restoreSiebelAttachments]: https://github.com/andrealmar/scripts/blob/master/restoreSiebelAttachments.py
