@@ -9,28 +9,28 @@ categories:
 - java
 - jsch
 - play framework
-tags: []
-meta:
-  _edit_last: '1'
-author:
-  login: admin
-  email: me@andrealmar.com
-  display_name: Andre Almar
-  first_name: Andre
-  last_name: Almar
+comments: true
 ---
-<p>Howdy,</p>
-<p>I'm gonna show you how to use the the Java library JSch - Java Secure Channel to connect to a server and send SSH commands to a UNIX shell and then return the output to our webpage. I'm using Play Framework to develop this webapp. If you want to know more about Play Framework just visit <a href="https://www.playframework.com">https://www.playframework.com</a></p>
-<p><strong>A little bit about JSch:</strong></p>
-<p>JSch is a pure Java implementation of <a href="http://ietf.org/html.charters/secsh-charter.html" target="_blank">SSH2</a>.<br />
-JSch allows you to connect to an sshd server and use port forwarding, X11 forwarding, file transfer, etc., and you can integrate its functionality into your own Java programs. JSch is licensed under <a href="http://www.jcraft.com/jsch/LICENSE.txt">BSD style license</a>.</p>
-<p>You can find more information about the library in <a href="http://www.jcraft.com/jsch/">http://www.jcraft.com/jsch/</a></p>
-<p><strong>Case scenario:</strong></p>
-<p>I want to send a SSH command to an UNIX server via some Java class. I want to the output of this command that I sent is shown in the user's screen through the web browser.</p>
-<p>Our environment uses a Private Key to allow SSH connections between one machine to another. In the code snippets you will see that the keys are passed through the method</p>
-<pre class="lang:java decode:true">jsch.addIdentity();</pre>
-<p>1st: the code snippet for the controller Application.java:</p>
-<pre class="lang:java decode:true" title="JSch with Play Framework - Example">package controllers;
+Today I'm gonna show you how to use the the Java library _JSch - Java Secure Channel_ to connect to a server and send SSH commands to a UNIX shell and then return the output to our webpage. I'm using _Play Framework_ to develop this webapp. If you want to know more about Play Framework just visit [http://www.playframework.com](http://www.playframework.com "http://www.playframework.com")  
+<br />
+A little bit about _JSch_:
+_JSch_ is a pure Java implementation of <a href="http://ietf.org/html.charters/secsh-charter.html" target="_blank">SSH2</a>.  
+_JSch_ allows you to connect to an sshd server and use port forwarding, X11 forwarding, file transfer, etc., and you can integrate its functionality into your own Java programs. _JSch_ is licensed under <a href="http://www.jcraft.com/jsch/LICENSE.txt">BSD style license</a>.</p>
+You can find more information about the library in <a href="http://www.jcraft.com/jsch/">http://www.jcraft.com/jsch/</a>
+<br /><br />**Case scenario:**  
+I want to send a SSH command to an UNIX server via some Java class. I want to the output of this command that I sent is shown in the user's screen through the web browser.
+Our environment uses a Private Key to allow SSH connections between one machine to another. In the code snippets you will see that the keys are passed through the method:    
+<br />
+```
+jsch.addIdentity();
+```
+<br />
+<br />
+1st: the code snippet for the controller _Application.java_:  
+
+
+```java
+package controllers;
 
 import oi.siebel.Control; //that's the Class I created to send the SSH commands to an UNIX shell
 import play.mvc.Controller;
@@ -47,10 +47,10 @@ public class Application extends Controller {
 
             try {
                 oi.siebel.Control a = new Control();
-                HashMap&lt;String, String[]&gt; result = null;
-                HashMap&lt;String, Integer&gt; result2 = null;
+                HashMap<String, String[]> result = null;
+                HashMap<String, Integer> result2 = null;
                 String[] result3 = null;
-                HashMap&lt;String, String&gt; result4 = null;
+                HashMap<String, String> result4 = null;
                 Iterator it = null;
 
                 resultado = a.listOHSParam(Control.EnvironmentOptions.NonProduction, "server01", "/siebel/MiddlewareHome/Oracle_WT1/instances/instance1");
@@ -66,9 +66,13 @@ public class Application extends Controller {
             return ok(result);
         }
 
-}</pre>
-<p>2nd: the code snippet for the controller Control.java:</p>
-<pre class="lang:java decode:true">package controllers;
+}
+```
+<br />
+2nd: the code snippet for the controller Control.java:   
+
+```java
+package controllers;
 
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
@@ -163,7 +167,9 @@ public class Control {
         return result;
     }
 
-}</pre>
-<p>Output of the command being displayed in a web browser:</p>
-<p><a href="http://andrealmar.com/blog/wp-content/uploads/2015/03/play-JSch.png"><img class="aligncenter size-full wp-image-60" src="{{ site.baseurl }}/assets/play-JSch.png" alt="play-JSch" width="662" height="712" /></a></p>
-<p>That's it! See ya!</p>
+}
+```  
+<br />
+Output of the command being displayed in a web browser:  
+<br />![Genealogical_Tree]({{ site.url }}/assets/images/play-JSch.png)  
+<br />That's all folks. See ya next time!
