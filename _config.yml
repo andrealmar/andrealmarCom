@@ -37,6 +37,9 @@ owner:
   google:
     plus: #username
     analytics:
+      provider : google
+      google :
+          tracking_id : 'UA-58773330-1'
     verify:
     ad-client:
     ad-slot:
