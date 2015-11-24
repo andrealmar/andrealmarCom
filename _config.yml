@@ -4,11 +4,12 @@ title:            This Coding Life
 locale:           en_US
 url:
 
-
 # Jekyll configuration
 
-permalink:   /:year/:month/:day/:title
-markdown:    kramdown
+permalink:   /:year/:month/:title
+markdown:    redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
 highlighter: pygments
 sass:
   sass_dir: _sass

@@ -10,7 +10,7 @@ comments: true
 Hi all, here is my solution to make the Siebel 6.3 attachments restore easier. Following the rules of automating boring stuff with Python, I did the script that I'm sharing with you guys. Enjoy!
 It is also on my Github: [restoreSiebelAttachments]
 
-{% highlight ruby %}
+```python
 import os
 import glob
 import sys
@@ -66,7 +66,7 @@ target = "\\NETWORK-PATH-DESTINATION\%s" % (Dir)
 output = os.system ("""xcopy "%s" "%s" """ % (source, target))
 
 print "ATTACHMENTS RESTORED!!!"
-{% endhighlight %}
+```
 
 
 What the script does? You pass the ROW_ID and the script takes care of the rest. It will look at the database, find the FILE_REV_NUMBER, look at the purge folder and restore the attachment based on the ROW_ID that you entered.  
