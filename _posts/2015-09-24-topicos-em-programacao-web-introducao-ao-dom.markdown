@@ -9,7 +9,7 @@ categories: web javascript web-development tópicos em programação web
 comments: true
 ---
 O que é DOM? - DOM significa  DOCUMENT OBJECT MODEL. Ok mas e daí?  
-Em termos gerais o DOM é uma API (application programming interface) que serve para interagirmos com documentos HTML e XML.  
+Em termos gerais o DOM é uma API (application programming interface) que serve para interagirmos com documentos HTML e XML.
 Provavelmente só esta explicação é um pouco confusa. Mas estamos aqui para explicar isso para você meu caro leitor. Vamos aprender como o DOM é manipulado e como utilizar os métodos corretos em Javascript para manipulá-lo.  
 A melhor maneira de pensarmos a respeito do DOM, é que ele é uma árvore de objetos aninhados.
 <br />
