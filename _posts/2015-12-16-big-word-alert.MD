@@ -11,3 +11,6 @@ Dependency Injection - http://klauslaube.com.br/2015/10/24/injecao-de-dependenci
 Decorators - http://klauslaube.com.br/2011/08/02/decorators-em-python.html
 Closures - http://klauslaube.com.br/2011/05/29/afinal-o-que-sao-closures.html
 Wrapper -
+Callback - 
+Throughput - 
+
