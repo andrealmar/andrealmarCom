@@ -15,7 +15,7 @@ We are in late 2015 and I thought this could be a good time to calm down and car
 But in my case Autonomy means that I can do what I want at the time I want.  
 **Meaning:** I can work with really nice customers and work with the best and learn from them. I can work from my home in Brazil or I can work from a co-working space in Thailand. No more 9-5. Results, delivery and satisfied customer. This is what matters. It's up to me.  
 <br />
-Then I started to search for jobs that reflect this kind of thinking. I came across and I've found [TopTal](http://www.toptal.com). I really liked TopTal's philosophy and way of working and I decided to apply for the [TopTal Web development netwok](http://www.toptal.com/web).
+Then I started to search for jobs that reflect this kind of thinking. I came across and I've found [TopTal](http://www.toptal.com). I really liked TopTal's philosophy and way of working and I decided to apply for the [TopTal Web development network](http://www.toptal.com/web).
 They even have a Python Interviewing guide that I'm going to dig in and learn more about what they are looking for. <br />  
 [The Vital Guide to Python Interviewing](http://www.toptal.com/python#hiring-guide "Python Interviewing")<br />  
 
