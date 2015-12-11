@@ -7,23 +7,14 @@ published: true
 status: publish
 categories:
 - UCM
-tags: []
-meta:
-  _edit_last: '8405276'
-  _wp_old_slug: ''
-author:
-  login: andrealmar
-  email: dreh@ymail.com
-  display_name: andrealmar
-  first_name: ''
-  last_name: ''
+comments: true
 ---
-<p>Muita gente se pergunta a respeito da performance do Oracle UCM. Eu mesmo me perguntava as vezes. Com o lançamento do Oracle UCM 11g algumas dúvidas (parecem) que foram sanadas. A documentação à respeito de performance e sizing da versão 10g era uma $%#@&amp;¨* (substitua $%#@&amp;¨* pelo elogio que quiser ;D) se é que existia alguma documentação oficial da ORACLE sobre esse assunto...</p>
-<p>Mas...consultando alguns documentos a respeito da nova versão 11g...achei alguns testes interessantes que podem servir de parâmetro para quando vocês estiverem fazendo um sizing ou medindo a performance do UCM em algum cliente.</p>
-<p>Vamos lá...a Oracle executou testes com a nova versão 11g do UCM e chegou a algumas conclusões interessantes.</p>
-<p>Ela dividiu em 2 (dois), os principais tipos de aplicações feitas com o UCM: High-Performance Web Sites/Delivery e Imaging/High Volume Ingestion.</p>
-<p>A diferença entre essas 2 aplicações é que enquanto na High-Performance Web Sites/Delivery temos um cenário com um <em>input</em> de dados de baixo para médio com centenas ou milhões de <em>viewers</em> , busca Full-Text podendo ser ou não combinada com os metadados e conversões (para PDF, etc) extensivas, no outro cenário, Imaging/High Volume Ingestion, temos um <em>input</em> extremamente alto, poucos <em>viewers</em>, na busca temos alguns campos somente e quase nenhum processo de conversão sendo feito.</p>
-<p>Considerando testes feitos com um Hardware Commodity com as seguintes configurações:</p>
+Muita gente se pergunta a respeito da performance do Oracle UCM. Eu mesmo me perguntava as vezes. Com o lançamento do Oracle UCM 11g algumas dúvidas (parecem) que foram sanadas. A documentação à respeito de performance e sizing da versão 10g era uma $%#@&amp;¨* (substitua $%#@&amp;¨* pelo elogio que quiser ;D) se é que existia alguma documentação oficial da ORACLE sobre esse assunto...  <br />  
+Mas...consultando alguns documentos a respeito da nova versão 11g...achei alguns testes interessantes que podem servir de parâmetro para quando vocês estiverem fazendo um sizing ou medindo a performance do UCM em algum cliente.  <br />  
+Vamos lá...a Oracle executou testes com a nova versão 11g do UCM e chegou a algumas conclusões interessantes.
+Ela dividiu em 2 (dois), os principais tipos de aplicações feitas com o UCM: High-Performance Web Sites/Delivery e Imaging/High Volume Ingestion.  <br />  
+A diferença entre essas 2 aplicações é que enquanto na High-Performance Web Sites/Delivery temos um cenário com um <em>input</em> de dados de baixo para médio com centenas ou milhões de <em>viewers</em> , busca Full-Text podendo ser ou não combinada com os metadados e conversões (para PDF, etc) extensivas, no outro cenário, Imaging/High Volume Ingestion, temos um <em>input</em> extremamente alto, poucos <em>viewers</em>, na busca temos alguns campos somente e quase nenhum processo de conversão sendo feito.  
+Considerando testes feitos com um Hardware Commodity com as seguintes configurações:
 <ul>
 <li>único Node</li>
 <li>2 cpu’s de 2.33 Ghz Xeon</li>
