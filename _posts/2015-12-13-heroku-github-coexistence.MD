@@ -9,7 +9,7 @@ published: true
 
 Ok, you've deployed your app to [Heroku](http://www.heroku.com) but there is something missing. You want to show the world your new work done. You want to show your brand new awesome code.  
 How to do that? It's very simple actually.  <br />  
-First you need to create a new repository in your GitHub account. Click on the green button (picture below) to create a new repository in your GitHub account:  
+First you need to create a new repository on your GitHub account. Click on the green button (picture below) to create a new repository on your GitHub account:  
 <br />
 ![Eventex-1]({{ site.url }}/assets/images/github-heroku-1.png)  
 <br />  
@@ -31,3 +31,5 @@ Now you can push to GitHub using the command below:
 git push origin master --force
 ```  <br />  
 For the *first time* you will have to do a forced push (--force). Because now you are assuming that you're pushing what used to be the repository you used *exclusively* for Heroku. But don't worry. You'll still be able to push to Heroku using ```git push heroku master```.
+<br />  
+{ }'s
