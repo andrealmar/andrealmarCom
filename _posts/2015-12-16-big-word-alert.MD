@@ -13,4 +13,5 @@ Closures - http://klauslaube.com.br/2011/05/29/afinal-o-que-sao-closures.html
 Wrapper -
 Callback - 
 Throughput - 
-
+Stateless vs Stateful - WTTD
+Parse - 
