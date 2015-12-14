@@ -15,3 +15,4 @@ Callback -
 Throughput - 
 Stateless vs Stateful - WTTD
 Parse - 
+Serialize - 
