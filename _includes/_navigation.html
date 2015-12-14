@@ -12,7 +12,8 @@
 				        {% assign domain = site.url %}
 				    {% endif %}
 				    <li><a href="{{ domain }}{{ link.url }}" {% if link.url contains 'http' %}target="_blank"{% endif %}>{{ link.title }}</a></li>
-				{% endfor %}
+						{% endfor %}
+						<li><i class="icon-feed"></i> <a href="{{ site.url }}/assets/download/Andre_Resume_11_2015.pdf" title="Andre Araujo / Resumé">Resumé</a>
 		    </ul>
 		</nav>
 	</div><!-- /.top-navigation -->
