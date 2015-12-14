@@ -7,7 +7,10 @@ comments: true
 ---
 
 Hi. My full name is Andre Almeida Araujo. But you can call me `Andre Almar`. ALMAR stands for “**ALM**eida **AR**aujo”, Got it?
-I’m the founder of this blog and a software engineer passionate about programming languages, operating systems, platforms and distributed systems and I'm always open and eager to learn. In this blog I do my best to share my musings about the Software Development world. I have a motto: "My goal is to achieve excellence in everything I'm doing". Oh...and if you have a good challenge for me, drop me a message and I will be glad to help you out. 
+I’m the founder of this blog and a software engineer passionate about programming languages, operating systems, platforms and distributed systems and I'm always open and eager to learn. In this blog I do my best to share my musings about the Software Development world. I have a motto: "My goal is to achieve excellence in everything I'm doing". Oh...and if you have a good challenge for me, drop me a message and I will be glad to help you out.
+
+## You can download my CV here (PDF):
+* [Resumé]({{ site.url }}/assets/download/Andre_Resume_11_2015.pdf) - last updated Nov 14, 2015
 
 ## Featured in:
 
