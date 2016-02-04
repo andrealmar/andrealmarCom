@@ -36,6 +36,9 @@ On the left Menu, click on *Install* option. We are going to install the followi
 The installation is pretty straightforward, you search for the package and after you've found you click on *Install*. It's simple as that.
 <br />  
 After that your **ATOM** will be ready to rock some Python code. But we are not finished yet. If you try to open a Python project using **ATOM** you will notice that things are not working well.
+<br />  
+![Atom_Error]({{ site.url }}/assets/images/atom-error.png)
+<br />  
 This happens because ATOM uses **pep8**, **flake8** and **jedi** packages in its plugins. That's why we need to install those Python packages.
 <br />  
 You already created your Python Virtual Environment following the best practices right? If so we are going to install the following Python packages:
@@ -61,5 +64,7 @@ pip install pep8 flake 8 jedi
 ```
 <br />  
 And we're done. Very simple and you will have your **ATOM** editor ready to use as your Python Development environment.  
+<br />  
+![Atom_Error]({{ site.url }}/assets/images/atom-python-dev-env-working.png)
 <br />  
 See ya !!!
