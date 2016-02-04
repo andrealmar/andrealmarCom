@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How to setup ATOM as your Python development environment"
-date:   2015-12-16 15:00:00 -0200
+date:   2016-02-04 12:00:00 -0200
 categories: python
 comments: true
 published: true
