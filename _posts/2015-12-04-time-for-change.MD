@@ -12,17 +12,10 @@ We are in late 2015 and I thought this could be a good time to calm down and car
 * the right or condition of self-government, especially in a particular sphere.<br />
 * freedom from external control or influence; independence.<br />
 
-But in my case Autonomy means that I can do what I want at the time I want.  
-**Meaning:** I can work with really nice customers and work with the best and learn from them. I can work from my home in Brazil or I can work from a co-working space in Thailand. No more 9-5. Results, delivery and satisfied customer. This is what matters. It's up to me.  
-<br />
-Then I started to search for jobs that reflect this kind of thinking. I came across and I've found [TopTal](http://www.toptal.com). I really liked TopTal's philosophy and way of working and I decided to apply for the [TopTal Web development network](http://www.toptal.com/web).
-They even have a Python Interviewing guide that I'm going to dig in and learn more about what they are looking for. <br />  
-[The Vital Guide to Python Interviewing](http://www.toptal.com/python#hiring-guide "Python Interviewing")<br />  
-
-<br />
-Another thing that really got my attention was this post from Breanden Beneschott: [How to Travel While Working: The Traveling Engineer's Survival Guide](http://www.toptal.com/freelance/the-traveling-engineers-survival-guide "The Traveling Engineer's Survival Guide")<br />
-<br />
-Man I would love to travel while working since traveling and getting to know other cultures are one of my deepest passions.
-So I'm here writing this blog post to share my experiences during the interview process. I don't know yet if I'm going to be successful or not but I'll give it a try and whatever the result is it will worth it for sure.  
+But in my case Autonomy means that I can have an equal relation with my employer or my customers.  
+**Meaning:** I can work with really nice customers and work with the best and learn from them. I can work from my home in Brazil or I can work from a co-working space in Thailand. No more 9-5. Results, delivery and satisfied customer. This is what matters. It's up to me.  As my mentor Henrique Bastos used to say:  <br />  
+```
+Life is risky. The big question is whether the way you walk is up to you, or if it's defined by others.
+```  
 <br />
 Take care  
