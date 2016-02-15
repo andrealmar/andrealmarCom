@@ -31,9 +31,11 @@ https://twitter.com/andre_almar/status/694169305097854976
 
 * Collaborating on Python communities like Python-MG, WTTD and CodeNewbies
 
-* Preparing myself to give TechTalks
+* Preparing myself to give TechTalks in local events
 
 * Reading these [books]({{ site.url }}/books) 
+
+* Running 3x a week
 
 ## Last Update:
 * February, 2016
