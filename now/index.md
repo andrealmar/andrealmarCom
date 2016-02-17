@@ -25,8 +25,6 @@ https://twitter.com/andre_almar/status/694169305097854976
 
 * Researching and learning new topics on Python like Coroutines and Metaclasses to write articles in my blog later. 
 
-* Spending some time each week finishing my latest freelancing jobs
-
 * Finishing my thesis for my Software Engineering graduate diploma
 
 * Collaborating on Python communities like Python-MG, WTTD and CodeNewbies
@@ -36,6 +34,8 @@ https://twitter.com/andre_almar/status/694169305097854976
 * Reading these [books]({{ site.url }}/books) 
 
 * Running 3x a week
+
+* I've started working in a new freelance project
 
 ## Last Update:
 * February, 2016
