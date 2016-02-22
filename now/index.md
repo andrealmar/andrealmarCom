@@ -37,5 +37,7 @@ https://twitter.com/andre_almar/status/694169305097854976
 
 * I've started working in a new freelance project
 
+* wrote an article for PythonClub (http://www.pythonclub.com.br) about Generators
+
 ## Last Update:
 * February, 2016
